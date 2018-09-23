@@ -1,0 +1,49 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:ViewModels="clr-namespace:OpenTourClient.ViewModels" 
+        x:Class="OpenTourClient.Views.ToursView"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel>
+        <DataGrid DockPanel.Dock="Top" HorizontalAlignment="Left"
+                  ItemsSource="{Binding Tours}" 
+                  Margin="10,10,0,0" 
+                  VerticalAlignment="Top" 
+                  Focusable="False" 
+                  AutoGenerateColumns="False" 
+                  SelectionChanged="DataGrid_SelectionChanged"
+                  SelectedItem="{Binding SelectedTourViewModel, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TxtTourName}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                <DataGridTextColumn Binding="{Binding TxtDescription}" ClipboardContentBinding="{x:Null}" Header="Description"/>
+                <DataGridTextColumn Binding="{Binding TxtTags}" ClipboardContentBinding="{x:Null}" Header="Tags"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <m:Map  DockPanel.Dock="Bottom"
+                x:Name="Map"
+                CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
+                Center="{Binding SelectedTourViewModel.Center}" 
+                ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
+
+    </DockPanel>
+</UserControl>
