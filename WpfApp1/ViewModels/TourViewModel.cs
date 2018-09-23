@@ -5,49 +5,58 @@ namespace OpenTourClient.ViewModels
 {
     public class TourViewModel
     {
-        private Tour tour;
+        private ITourRepository tourRepository;
 
-        public TourViewModel()
-        {     
+        public Tour Tour { get; private set; }
+
+        public TourViewModel(ITourRepository tourRepository)
+        {
+            this.tourRepository = tourRepository;
+            this.Tour = tourRepository.LoadAll()[0];
         }
 
-        public TourViewModel(Tour tour)
+        public TourViewModel(ITourRepository tourRepository, Tour tour)
         {
-            this.tour = tour;
+            this.tourRepository = tourRepository;
+            this.Tour = tour;
         }
 
         public string TxtTourName
         {
-            get { return tour.Name; }
-            set { tour.Name = value; }
+            get { return Tour.Name; }
+            set { Tour.Name = value; }
         }
 
         public string TxtDescription
         {
-            get { return tour.Description; }
-            set { tour.Description = value; }
+            get { return Tour.Description; }
+            set { Tour.Description = value; }
         }
 
         public int IntZoomLevel
         {
-            get { return tour.ZoomLevel; }
-            set { tour.ZoomLevel = value; }
+            get { return Tour.ZoomLevel; }
+            set { Tour.ZoomLevel = value; }
         }
 
         public Location Center
         {
-            get { return tour.Center; }
-            set { tour.Center = value; }
+            get { return Tour.Center; }
+            set { Tour.Center = value; }
         }
 
         public string TxtCenter
         {
-            get { return string.Format("{0},{1}",tour.Center.Latitude, tour.Center.Longitude) ; }
+            get { return string.Format("{0},{1}",Tour.Center.Latitude, Tour.Center.Longitude) ; }
         }
 
         public string TxtTags
         {
-            get { return string.Join(", ", this.tour.Tags);  }
+            get
+            {
+                if (this.Tour.Tags == null) return string.Empty;
+                return string.Join(", ", this.Tour.Tags);
+            }
         }
 
         public Pushpin PushpinLocation

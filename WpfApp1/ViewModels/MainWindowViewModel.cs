@@ -16,12 +16,15 @@ namespace OpenTourClient.ViewModels
             container.RegisterType<ITourRepository, TourRepository>();
 
             ToursView toursView = container.Resolve<ToursView>();
+            TourView tourView = container.Resolve<TourView>();
 
             this.NavigationItems = new[]
             {
                 new NavigationItem("Magnify", toursView),
+                new NavigationItem("Walk", tourView)
             };
         }
+
         public NavigationItem[] NavigationItems { get; private set; }
     }
 }

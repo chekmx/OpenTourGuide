@@ -10,7 +10,7 @@ namespace OpenTourClient.ViewModels
         public ToursViewModel(ITourRepository tourRepository)
         {
             this.tourRepository = tourRepository;
-            this.Tours = new ObservableCollection<TourViewModel>(tourRepository.LoadAll());
+            this.Tours = new ObservableCollection<TourViewModel>(tourRepository.LoadAll().Select(t => new TourViewModel(tourRepository, t)));
             this.SelectedTourViewModel = this.Tours.First();
         }
 

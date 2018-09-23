@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using OpenTourClient.Models;
+using System.Collections.Generic;
 
 namespace OpenTourClient.ViewModels
 {
     public interface ITourRepository
     {
-        List<TourViewModel> LoadAll();
+        List<Tour> LoadAll();
     }
 }
