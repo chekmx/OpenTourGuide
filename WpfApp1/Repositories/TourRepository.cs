@@ -6,9 +6,16 @@ namespace OpenTourClient.ViewModels
 {
     public class TourRepository: ITourRepository
     {
+        private List<Tour> tours;
+
         public List<Tour> LoadAll()
         {
-            var Tours = new List<Tour>()
+            return tours ?? (tours = GenerateFakeTourData());
+        }
+
+        private static List<Tour> GenerateFakeTourData()
+        {
+            return new List<Tour>()
             {
                 new Tour()
                 {
@@ -35,8 +42,11 @@ namespace OpenTourClient.ViewModels
                     ZoomLevel = 14
                 },
             };
+        }
 
-            return Tours;
+        public void Save(Tour tour)
+        {
+            this.tours.Add(tour);
         }
     }
 }

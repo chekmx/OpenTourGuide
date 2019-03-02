@@ -95,6 +95,7 @@
     <Compile Include="Repositories\ITourRepository.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NavigationItem.cs" />
+    <Compile Include="ViewModels\CommandHandler.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="ViewModels\TourViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">

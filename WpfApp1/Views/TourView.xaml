@@ -3,39 +3,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OpenTourClient"
-        xmlns:ViewModels="clr-namespace:OpenTourClient.ViewModels"
-        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" x:Class="OpenTourClient.TourView"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+    x:Class="OpenTourClient.TourView"
         mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <materialDesignConverters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" TrueValue="Collapsed" FalseValue="Visible" />
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="60" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <m:Map  Grid.Row="3"
-                    Grid.Column="0"
-                    x:Name="Map"
-                    CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
-                    Center="{Binding SelectedTourViewModel.Center}" 
-                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
         <ComboBox Grid.Row="0" 
-                  Grid.Column="0" 
+                  Grid.Column="1" 
                   ItemsSource="{Binding Tours}" 
                   SelectedItem="{Binding SelectedTourViewModel}" 
                   DisplayMemberPath="TxtTourName" 
-                  HorizontalAlignment="Center" 
+                  HorizontalAlignment="Left" 
                   Margin="5,5,0,0" 
                   VerticalAlignment="Top" 
                   Width="660" 
                   Height="26"
                   SelectionChanged="ComboBox_SelectionChanged"/>
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SelectedTourViewModel.TxtTourName}" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
-        <TextBlock  Grid.Row="2"  Grid.Column="0" Text="{Binding SelectedTourViewModel.TxtDescription}" HorizontalAlignment="Center" Margin="5,125,0,0" VerticalAlignment="Top" Width="660" Height="173"/>
-        <!--<TextBox Text="{Binding TxtTags}" HorizontalAlignment="Left" Margin="85,298,0,0" VerticalAlignment="Top" Width="660" Height="15"/>-->
+        <materialDesign:PopupBox
+            Grid.Row="0"
+            Grid.Column="2"
+            Grid.RowSpan="2"
+            Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+            PlacementMode="LeftAndAlignTopEdges"
+            ToolTipService.Placement="Right"
+            ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox">
+            <StackPanel>
+                <Button
+                    ToolTip="New" Command="{Binding CreateNew}">
+                    <materialDesign:PackIcon
+                        Kind="NewBox"
+                        Height="24"
+                        Width="24" />
+                </Button>
+                <Button
+                    ToolTip="Edit">
+                    <materialDesign:PackIcon
+                        Kind="ContentDuplicate"
+                        Height="24"
+                        Width="24" />
+                </Button>
+                <Button
+                    ToolTip="Save">
+                    <materialDesign:PackIcon
+                        Kind="ContentSave"
+                        Height="24"
+                        Width="24" />
+                </Button>
+            </StackPanel>   
+        </materialDesign:PopupBox>
+        <Label Grid.Row="1" Grid.Column="0" Content="Name"  HorizontalAlignment="Right"></Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtTourName}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Description"  HorizontalAlignment="Right"></Label>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtDescription}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Tags"  HorizontalAlignment="Right"></Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtTags}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <m:Map  Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    x:Name="Map"
+                    CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
+                    Center="{Binding SelectedTourViewModel.Center}" 
+                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using OpenTourClient.Models;
+using System;
 using System.Linq;
 
 namespace OpenTourClient.ViewModels
@@ -18,10 +19,6 @@ namespace OpenTourClient.ViewModels
 
         public TourViewModel(ITourRepository tourRepository, Tour tour)
         {
-            if(string.IsNullOrEmpty(tour.Name))
-            {
-                tour = tourRepository.LoadAll().FirstOrDefault();
-            }
             this.tourRepository = tourRepository;
             this.Tour = tour;
         }
@@ -62,6 +59,16 @@ namespace OpenTourClient.ViewModels
                 if (this.Tour.Tags == null) return string.Empty;
                 return string.Join(", ", this.Tour.Tags);
             }
+
+            set
+            {
+                this.Tour.Tags = value.Replace(", ", ",").Split(',').ToList();
+            }
+        }
+
+        internal void Save()
+        {
+            this.tourRepository.Save(this.Tour);
         }
 
         public Pushpin PushpinLocation
