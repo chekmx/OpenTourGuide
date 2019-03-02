@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenTourClient"
-        xmlns:ViewModels="clr-namespace:OpenTourClient.ViewModels" x:Class="OpenTourClient.TourView"
+        xmlns:ViewModels="clr-namespace:OpenTourClient.ViewModels"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" x:Class="OpenTourClient.TourView"
         mc:Ignorable="d">
     <Grid>
+        <m:Map  Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="Map"
+                    CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
+                    Center="{Binding Center}" 
+                    ZoomLevel="{Binding IntZoomLevel}"/>
         <TextBox Text="{Binding TxtTourName}" HorizontalAlignment="Left" Margin="85,99,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
         <TextBlock Text="{Binding TxtDescription}" HorizontalAlignment="Left" Margin="85,125,0,0" VerticalAlignment="Top" Width="660" Height="173"/>
         <!--<TextBox Text="{Binding TxtTags}" HorizontalAlignment="Left" Margin="85,298,0,0" VerticalAlignment="Top" Width="660" Height="15"/>-->

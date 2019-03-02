@@ -20,12 +20,29 @@ namespace OpenTourClient
             set
             {
                 this.DataContext = value;
+                PopulateMap();
             }
         }
 
         public TourView()
         {
             InitializeComponent();
+        }
+
+        public TourView(TourViewModel tourViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = tourViewModel;
+        }
+
+        private void PopulateMap()
+        {
+            if (Map != null)
+            {
+                Map.Children.Clear();
+                Map.SetView(this.ViewModel.Center, this.ViewModel.IntZoomLevel);
+                Map.Children.Add(this.ViewModel.PushpinLocation);
+            }
         }
     }
 }

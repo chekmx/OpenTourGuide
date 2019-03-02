@@ -25,24 +25,36 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <DockPanel>
-        <m:Map  DockPanel.Dock="Bottom"
-                x:Name="Map"
-                CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
-                Center="{Binding SelectedTourViewModel.Center}" 
-                ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
-        <DataGrid DockPanel.Dock="Top" HorizontalAlignment="Left"
-                  ItemsSource="{Binding Tours}" 
-                  Margin="10,10,0,0" 
-                  VerticalAlignment="Top" 
-                  Focusable="False" 
-                  AutoGenerateColumns="False" 
-                  SelectionChanged="DataGrid_SelectionChanged"
-                  SelectedItem="{Binding SelectedTourViewModel, Mode=TwoWay}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TxtTourName}" ClipboardContentBinding="{x:Null}" Header="Name"/>
-                <DataGridTextColumn Binding="{Binding TxtDescription}" ClipboardContentBinding="{x:Null}" Header="Description"/>
-                <DataGridTextColumn Binding="{Binding TxtTags}" ClipboardContentBinding="{x:Null}" Header="Tags"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <m:Map  Grid.Row="0"
+                    Grid.Column="0"
+                    x:Name="Map"
+                    CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
+                    Center="{Binding SelectedTourViewModel.Center}" 
+                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
+            <DataGrid Grid.Row="1"
+                      Grid.Column="0"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Tours}" 
+                      Margin="10,10,0,0" 
+                      VerticalAlignment="Bottom" 
+                      Focusable="False" 
+                      AutoGenerateColumns="False" 
+                      SelectionChanged="DataGrid_SelectionChanged"
+                      SelectedItem="{Binding SelectedTourViewModel, Mode=TwoWay}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding TxtTourName}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding TxtDescription}" ClipboardContentBinding="{x:Null}" Header="Description"/>
+                    <DataGridTextColumn Binding="{Binding TxtTags}" ClipboardContentBinding="{x:Null}" Header="Tags"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </DockPanel>
 </UserControl>

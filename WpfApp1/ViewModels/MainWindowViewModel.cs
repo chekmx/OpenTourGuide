@@ -10,18 +10,21 @@ namespace OpenTourClient.ViewModels
 {
     public class MainWindowViewModel
     {
+        public ToursView ToursView;
+        public TourView TourView;
+
         public MainWindowViewModel()
         {
             IUnityContainer container = new UnityContainer();
             container.RegisterType<ITourRepository, TourRepository>();
 
-            ToursView toursView = container.Resolve<ToursView>();
-            TourView tourView = container.Resolve<TourView>();
+            this.ToursView = container.Resolve<ToursView>();
+            this.TourView = container.Resolve<TourView>();
 
             this.NavigationItems = new[]
             {
-                new NavigationItem("Magnify", toursView),
-                new NavigationItem("Walk", tourView)
+                new NavigationItem("Magnify", this.ToursView),
+                new NavigationItem("Walk", this.TourView)
             };
         }
 
