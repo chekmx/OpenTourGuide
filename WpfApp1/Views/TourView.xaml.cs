@@ -1,7 +1,6 @@
 ﻿using OpenTourClient.ViewModels;
-using System.Windows;
 using System.Windows.Controls;
-using Unity.Attributes;
+using Unity;
 
 namespace OpenTourClient
 {

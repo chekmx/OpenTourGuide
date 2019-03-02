@@ -64,14 +64,14 @@
                         Width="24" />
                 </Button>
                 <Button
-                    ToolTip="Edit">
+                    ToolTip="Edit" Command="{Binding Edit}">
                     <materialDesign:PackIcon
                         Kind="ContentDuplicate"
                         Height="24"
                         Width="24" />
                 </Button>
                 <Button
-                    ToolTip="Save">
+                    ToolTip="Save"  Command="{Binding Save}">
                     <materialDesign:PackIcon
                         Kind="ContentSave"
                         Height="24"
@@ -80,11 +80,17 @@
             </StackPanel>   
         </materialDesign:PopupBox>
         <Label Grid.Row="1" Grid.Column="0" Content="Name"  HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtTourName}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <TextBox Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"
+                 Text="{Binding SelectedTourViewModel.TxtTourName}" 
+                 IsEnabled="{Binding CanEdit}"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Description"  HorizontalAlignment="Right"></Label>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtDescription}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <TextBox Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"
+                   Text="{Binding SelectedTourViewModel.TxtDescription}" 
+                   IsEnabled="{Binding CanEdit}"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Tags"  HorizontalAlignment="Right"></Label>
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedTourViewModel.TxtTags}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"
+                 Text="{Binding SelectedTourViewModel.TxtTags}" 
+                 IsEnabled="{Binding CanEdit}"/>
         <m:Map  Grid.Row="4"
                     Grid.Column="0"
                     Grid.ColumnSpan="3"

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourClient", "WpfApp1\OpenTourClient.csproj", "{0F24D37F-A805-44DD-950F-BD1855CD86DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourUtils", "OpenTourUtils\OpenTourUtils.csproj", "{AB5E66CC-15D5-4438-A467-6AC6A86E21A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0F24D37F-A805-44DD-950F-BD1855CD86DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F24D37F-A805-44DD-950F-BD1855CD86DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F24D37F-A805-44DD-950F-BD1855CD86DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5E66CC-15D5-4438-A467-6AC6A86E21A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5E66CC-15D5-4438-A467-6AC6A86E21A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5E66CC-15D5-4438-A467-6AC6A86E21A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5E66CC-15D5-4438-A467-6AC6A86E21A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
