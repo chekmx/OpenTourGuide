@@ -8,14 +8,34 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" x:Class="OpenTourClient.TourView"
         mc:Ignorable="d">
     <Grid>
-        <m:Map  Grid.Row="0"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <m:Map  Grid.Row="3"
                     Grid.Column="0"
                     x:Name="Map"
                     CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
-                    Center="{Binding Center}" 
-                    ZoomLevel="{Binding IntZoomLevel}"/>
-        <TextBox Text="{Binding TxtTourName}" HorizontalAlignment="Left" Margin="85,99,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
-        <TextBlock Text="{Binding TxtDescription}" HorizontalAlignment="Left" Margin="85,125,0,0" VerticalAlignment="Top" Width="660" Height="173"/>
+                    Center="{Binding SelectedTourViewModel.Center}" 
+                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
+        <ComboBox Grid.Row="0" 
+                  Grid.Column="0" 
+                  ItemsSource="{Binding Tours}" 
+                  SelectedItem="{Binding SelectedTourViewModel}" 
+                  DisplayMemberPath="TxtTourName" 
+                  HorizontalAlignment="Center" 
+                  Margin="5,5,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="660" 
+                  Height="26"
+                  SelectionChanged="ComboBox_SelectionChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SelectedTourViewModel.TxtTourName}" HorizontalAlignment="Center" Margin="5,5,0,0" VerticalAlignment="Top" Width="660" Height="26"/>
+        <TextBlock  Grid.Row="2"  Grid.Column="0" Text="{Binding SelectedTourViewModel.TxtDescription}" HorizontalAlignment="Center" Margin="5,125,0,0" VerticalAlignment="Top" Width="660" Height="173"/>
         <!--<TextBox Text="{Binding TxtTags}" HorizontalAlignment="Left" Margin="85,298,0,0" VerticalAlignment="Top" Width="660" Height="15"/>-->
     </Grid>
 </UserControl>

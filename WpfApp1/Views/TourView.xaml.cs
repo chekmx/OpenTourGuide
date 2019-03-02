@@ -11,11 +11,11 @@ namespace OpenTourClient
     public partial class TourView : UserControl
     {
         [Dependency]
-        public TourViewModel ViewModel
+        public ToursViewModel ViewModel
         {
             private get
             {
-                return this.DataContext as TourViewModel;
+                return this.DataContext as ToursViewModel;
             }
             set
             {
@@ -29,20 +29,19 @@ namespace OpenTourClient
             InitializeComponent();
         }
 
-        public TourView(TourViewModel tourViewModel)
-        {
-            InitializeComponent();
-            this.DataContext = tourViewModel;
-        }
-
         private void PopulateMap()
         {
             if (Map != null)
             {
                 Map.Children.Clear();
-                Map.SetView(this.ViewModel.Center, this.ViewModel.IntZoomLevel);
-                Map.Children.Add(this.ViewModel.PushpinLocation);
+                Map.SetView(this.ViewModel.SelectedTourViewModel.Center, this.ViewModel.SelectedTourViewModel.IntZoomLevel);
+                Map.Children.Add(this.ViewModel.SelectedTourViewModel.PushpinLocation);
             }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PopulateMap();
         }
     }
 }

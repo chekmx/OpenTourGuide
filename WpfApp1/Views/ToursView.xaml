@@ -30,18 +30,18 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="200" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <m:Map  Grid.Row="0"
+            <m:Map  Grid.Row="1"
                     Grid.Column="0"
                     x:Name="Map"
                     CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
                     Center="{Binding SelectedTourViewModel.Center}" 
                     ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
-            <DataGrid Grid.Row="1"
+            <DataGrid Grid.Row="0"
                       Grid.Column="0"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Center"
                       ItemsSource="{Binding Tours}" 
                       Margin="10,10,0,0" 
                       VerticalAlignment="Bottom" 
