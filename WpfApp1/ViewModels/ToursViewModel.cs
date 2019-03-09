@@ -8,6 +8,9 @@ using System.Xml.Linq;
 using OpenTourModel;
 using Microsoft.Maps.MapControl.WPF;
 using OpenTourInterfaces;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows;
 
 namespace OpenTourClient.ViewModels
 {
@@ -145,9 +148,25 @@ namespace OpenTourClient.ViewModels
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
                 {
                     Pushpin pushpin = new Pushpin();
+                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
                     pushpin.Location = pointOfInterest.Location;
                     map.Children.Add(pushpin);
                 }
+            }
+        }
+
+        private void PointOfInterestClicked(object sender, MouseButtonEventArgs e)
+        {
+            var pushPin = sender as Pushpin;
+            if (pushPin != null)
+            {
+                var map = pushPin.Parent as MapLayer;
+                TextBlock tb = new TextBlock();
+                tb.Foreground = new SolidColorBrush(
+                    Color.FromArgb(255, 128, 255, 128));
+                tb.Margin = new Thickness(5);
+                tb.Text = pushPin.Location.ToString();
+                map.AddChild(tb, pushPin.Location);
             }
         }
     }
