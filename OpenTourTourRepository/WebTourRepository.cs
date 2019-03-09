@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using OpenTourInterfaces;
-using System.Net;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
