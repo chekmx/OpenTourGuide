@@ -12,6 +12,7 @@ namespace OpenTourClient.ViewModels
         {
             IUnityContainer container = new UnityContainer();
             container.RegisterInstance(typeof(ITourRepository), new  TourRepository());
+            container.RegisterInstance(typeof(ToursViewModel), new ToursViewModel(container.Resolve<ITourRepository>()));
 
             this.ToursView = container.Resolve<ToursView>();
             this.TourView = container.Resolve<TourView>();

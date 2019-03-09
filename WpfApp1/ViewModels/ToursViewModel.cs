@@ -15,7 +15,6 @@ namespace OpenTourClient.ViewModels
 
         public GeoPosition<GeoCoordinate> CurrentPosition { get; private set; }
 
-        
         public bool CanEdit
         {
             get {return this.canEdit; }
@@ -86,6 +85,7 @@ namespace OpenTourClient.ViewModels
             tour.Center = this.CurrentPosition.Location.ToLocation();
             tour.ZoomLevel = 16;
             this.Tours.Add(this.SelectedTourViewModel);
+            OnPropertyChanged("Tours");
             return tour;
         }
 
@@ -93,6 +93,7 @@ namespace OpenTourClient.ViewModels
         {
             this.SelectedTourViewModel.Save();
             this.CanEdit = false;
+            OnPropertyChanged("Tours");
             return this.SelectedTourViewModel;
         }
 

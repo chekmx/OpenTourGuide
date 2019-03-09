@@ -5,7 +5,7 @@ using Unity;
 namespace OpenTourClient.Views
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for ToursView.xaml
     /// </summary>
     public partial class ToursView : UserControl
     {
@@ -42,6 +42,11 @@ namespace OpenTourClient.Views
                 Map.SetView(this.ViewModel.SelectedTourViewModel.Center, this.ViewModel.SelectedTourViewModel.IntZoomLevel);
                 Map.Children.Add(this.ViewModel.SelectedTourViewModel.PushpinLocation);
             }
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var test = this.ViewModel.Tours.Count;
         }
     }
 }

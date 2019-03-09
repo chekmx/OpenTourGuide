@@ -4,8 +4,11 @@ using OpenTourClient.Models;
 
 namespace OpenTourClient.ViewModels
 {
-    public class TourRepository: ITourRepository
+    public class TourRepository : ITourRepository
     {
+
+        public TourRepository()  {}
+
         private List<Tour> tours;
 
         public List<Tour> LoadAll()
