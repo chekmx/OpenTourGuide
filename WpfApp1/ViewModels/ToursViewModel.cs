@@ -151,6 +151,7 @@ namespace OpenTourClient.ViewModels
                     Pushpin pushpin = new Pushpin();
                     pushpin.MouseLeftButtonDown += PointOfInterestClicked;
                     pushpin.Location = pointOfInterest.Location.ToLocation();
+                    MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);
                 }
             }
