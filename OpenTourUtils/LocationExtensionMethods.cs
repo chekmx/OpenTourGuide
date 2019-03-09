@@ -79,8 +79,8 @@ namespace OpenTourUtils
         public static OpenTourInterfaces.ILocation ToILocation<T>(this Location location) where T : OpenTourInterfaces.ILocation, new()
         {
             var iLocation = new T();
-            location.Latitude = location.Latitude;
-            location.Longitude = location.Longitude;
+            iLocation.Latitude = location.Latitude;
+            iLocation.Longitude = location.Longitude;
             return iLocation;
         }
     }
