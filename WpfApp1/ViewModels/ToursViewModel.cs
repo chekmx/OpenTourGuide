@@ -85,6 +85,7 @@ namespace OpenTourClient.ViewModels
             tour.Center = this.CurrentPosition.Location.ToLocation();
             tour.ZoomLevel = 16;
             this.Tours.Add(this.SelectedTourViewModel);
+            this.CanEdit = true;
             OnPropertyChanged("Tours");
             return tour;
         }
