@@ -57,5 +57,17 @@ namespace OpenTourClient
         {
             PopulateMap();
         }
+
+        private void Map_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (this.ViewModel.CanEdit)
+            {
+                Map map = sender as Map;
+                Pushpin pushpin = new Pushpin();
+                LocationRect bounds = map.BoundingRectangle;
+                pushpin.Location = Map.ViewportPointToLocation(e.GetPosition(Map));
+                Map.Children.Add(pushpin);
+            }
+        }
     }
 }

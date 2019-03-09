@@ -97,6 +97,7 @@
                     x:Name="Map"
                     CredentialsProvider="AsTPGfgKSSjLKmV7vACik9zbL1OW8cIY_mEmOSp0GXdVTzP-GHtvzdYwygUH42RR" 
                     Center="{Binding SelectedTourViewModel.Center}" 
-                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}"/>
+                    ZoomLevel="{Binding SelectedTourViewModel.IntZoomLevel}" 
+                    MouseRightButtonDown="Map_MouseRightButtonDown"/>
     </Grid>
 </UserControl>

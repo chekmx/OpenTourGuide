@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenTourInterfaces;
+using OpenTourModel;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -13,7 +15,7 @@ namespace OpenTourClient.Models.Tests
         {
             var filePath = "./TestData/testgpx.gpx";
             var gpxTestData = XDocument.Load(filePath);
-            Tour testTour = new Tour(gpxTestData);
+            ITour testTour = new Tour(gpxTestData);
             testTour.Name.Should().Be("Wetzikon Cycling");
             testTour.Route.Count().Should().Be(2261);
         }

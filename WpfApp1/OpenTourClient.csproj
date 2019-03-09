@@ -129,7 +129,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Tour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -157,6 +156,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenTourInterfaces\OpenTourInterfaces.csproj">
+      <Project>{238c6b15-1d5f-4b4a-83f4-933a86165e84}</Project>
+      <Name>OpenTourInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenTourModel\OpenTourModel.csproj">
+      <Project>{0a4c6b33-04f5-48ad-9a16-c995c2d84c4e}</Project>
+      <Name>OpenTourModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenTourUtils\OpenTourUtils.csproj">
       <Project>{ab5e66cc-15d5-4438-a467-6ac6a86e21a3}</Project>
       <Name>OpenTourUtils</Name>

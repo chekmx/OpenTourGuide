@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows.Input;
 using System.Device.Location;
 using System;
-using OpenTourUtils;
 using System.Xml.Linq;
+using OpenTourModel;
 
 namespace OpenTourClient.ViewModels
 {
@@ -88,7 +88,7 @@ namespace OpenTourClient.ViewModels
             {
                 XDocument document = XDocument.Load(openFileDlg.FileName);
 
-                var tour = new Models.Tour(document);
+                var tour = new Tour(document);
                 this.SelectedTourViewModel = new TourViewModel(tourRepository, tour);
                 //tour.Center = this.CurrentPosition.Location.ToLocation();
                 tour.ZoomLevel = 16;

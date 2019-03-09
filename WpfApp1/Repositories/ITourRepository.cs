@@ -1,11 +1,11 @@
-﻿using OpenTourClient.Models;
+﻿using OpenTourInterfaces;
 using System.Collections.Generic;
 
 namespace OpenTourClient.ViewModels
 {
     public interface ITourRepository
     {
-        List<Tour> LoadAll();
-        void Save(Tour tour);
+        IEnumerable<ITour> LoadAll();
+        void Save(ITour tour);
     }
 }

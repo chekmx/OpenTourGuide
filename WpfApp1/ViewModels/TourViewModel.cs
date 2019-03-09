@@ -1,6 +1,5 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
-using OpenTourClient.Models;
-using System;
+using OpenTourInterfaces;
 using System.Linq;
 
 namespace OpenTourClient.ViewModels
@@ -9,15 +8,15 @@ namespace OpenTourClient.ViewModels
     {
         private ITourRepository tourRepository;
 
-        public Tour Tour { get; private set; }
+        public ITour Tour { get; private set; }
 
         public TourViewModel(ITourRepository tourRepository)
         {
             this.tourRepository = tourRepository;
-            this.Tour = tourRepository.LoadAll()[0];
+            this.Tour = tourRepository.LoadAll().ToList()[0];
         }
 
-        public TourViewModel(ITourRepository tourRepository, Tour tour)
+        public TourViewModel(ITourRepository tourRepository, ITour tour)
         {
             this.tourRepository = tourRepository;
             this.Tour = tour;

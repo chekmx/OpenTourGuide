@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using OpenTourUtils;
+using OpenTourInterfaces;
 
-namespace OpenTourClient.Models
+namespace OpenTourModel
 {
-    public class Tour
+    public class Tour : ITour
     {
         private const string gpx = "gpx";
         private const string trk = "trk";
