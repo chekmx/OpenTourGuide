@@ -47,6 +47,10 @@ namespace OpenTourClient
             polyline.Locations = this.ViewModel.SelectedTourViewModel.Tour.Route;
 
             Map.Children.Add(polyline);
+            if (polyline.Locations != null)
+            {
+                Map.SetView(polyline.Locations, new System.Windows.Thickness(5), 0);
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
