@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using OpenTourClient.ViewModels;
+using OpenTourModel;
 using System.Windows.Controls;
 using Unity;
 
@@ -21,52 +22,27 @@ namespace OpenTourClient
             set
             {
                 this.DataContext = value;
-                PopulateMap();
+                this.ViewModel.PopulateMap(Map);
             }
         }
 
         public TourView()
         {
             InitializeComponent();
-
-        }
-
-        private void PopulateMap()
-        {
-            if (Map != null)
-            {
-                Map.Children.Clear();
-                Map.SetView(this.ViewModel.SelectedTourViewModel.Center, this.ViewModel.SelectedTourViewModel.IntZoomLevel);
-                Map.Children.Add(this.ViewModel.SelectedTourViewModel.PushpinLocation);
-            }
-
-            MapPolyline polyline = new MapPolyline();
-            polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
-            polyline.StrokeThickness = 5;
-            polyline.Opacity = 0.7;
-            polyline.Locations = this.ViewModel.SelectedTourViewModel.Tour.Route;
-
-            Map.Children.Add(polyline);
-            if (polyline.Locations != null)
-            {
-                Map.SetView(polyline.Locations, new System.Windows.Thickness(5), 0);
-            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PopulateMap();
+            this.ViewModel.PopulateMap(Map);
         }
 
         private void Map_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (this.ViewModel.CanEdit)
             {
-                Map map = sender as Map;
-                Pushpin pushpin = new Pushpin();
-                LocationRect bounds = map.BoundingRectangle;
-                pushpin.Location = Map.ViewportPointToLocation(e.GetPosition(Map));
-                Map.Children.Add(pushpin);
+                var location = Map.ViewportPointToLocation(e.GetPosition(Map));
+                this.ViewModel.SelectedTourViewModel.Tour.PointsOfInterest.Add(new PointOfInterest(location));
+                this.ViewModel.PopulateMap(Map);
             }
         }
     }

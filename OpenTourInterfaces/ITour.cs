@@ -9,7 +9,8 @@ namespace OpenTourInterfaces
         string Description { get; set; }
         string Name { get; set; }
         LocationCollection Route { get; set; }
-        List<string> Tags { get; set; }
+        IList<string> Tags { get; set; }
+        IList<IPointOfInterest> PointsOfInterest { get; set; }
         int ZoomLevel { get; set; }
     }
 }

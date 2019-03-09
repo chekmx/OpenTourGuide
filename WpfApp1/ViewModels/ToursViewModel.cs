@@ -6,6 +6,8 @@ using System.Device.Location;
 using System;
 using System.Xml.Linq;
 using OpenTourModel;
+using Microsoft.Maps.MapControl.WPF;
+using OpenTourInterfaces;
 
 namespace OpenTourClient.ViewModels
 {
@@ -118,6 +120,35 @@ namespace OpenTourClient.ViewModels
         protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public void PopulateMap(Map map)
+        {
+            if (map != null)
+            {
+                map.Children.Clear();
+                map.SetView(this.SelectedTourViewModel.Center, this.SelectedTourViewModel.IntZoomLevel);
+                map.Children.Add(this.SelectedTourViewModel.PushpinLocation);
+
+                MapPolyline polyline = new MapPolyline();
+                polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
+                polyline.StrokeThickness = 5;
+                polyline.Opacity = 0.7;
+                polyline.Locations = this.SelectedTourViewModel.Tour.Route;
+
+                map.Children.Add(polyline);
+                if (polyline.Locations != null)
+                {
+                    map.SetView(polyline.Locations, new System.Windows.Thickness(5), 0);
+                }
+
+                foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
+                {
+                    Pushpin pushpin = new Pushpin();
+                    pushpin.Location = pointOfInterest.Location;
+                    map.Children.Add(pushpin);
+                }
+            }
         }
     }
 }

@@ -12,7 +12,10 @@ namespace OpenTourModel
         private const string trk = "trk";
         private const string name = "name";
 
-        public Tour() { }
+        public Tour()
+        {
+            this.PointsOfInterest = new List<IPointOfInterest>();
+        }
 
         public Tour(XDocument gpxDocument)
         {
@@ -20,13 +23,15 @@ namespace OpenTourModel
             this.Name = gpxDocument.Element(gpxNameSpace + gpx).Element(gpxNameSpace + trk).Element(gpxNameSpace + name).Value;
             this.Route = gpxDocument.ToLocationCollection();
             this.Center = this.Route[0];
+            this.PointsOfInterest = new List<IPointOfInterest>();
         }
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<string> Tags { get; set; }
+        public IList<string> Tags { get; set; }
         public Location Center { get; set; }
         public LocationCollection Route { get; set; }
+        public IList<IPointOfInterest> PointsOfInterest { get; set; }
         public int ZoomLevel { get; set; }
     }
 }
