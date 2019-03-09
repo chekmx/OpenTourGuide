@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using OpenTourClient.ViewModels;
+using OpenTourUtils;
 using Unity;
 
 namespace OpenTourClient.Views
@@ -39,7 +40,9 @@ namespace OpenTourClient.Views
             if (Map != null)
             {
                 Map.Children.Clear();
-                Map.SetView(this.ViewModel.SelectedTourViewModel.Center, this.ViewModel.SelectedTourViewModel.IntZoomLevel);
+                Map.SetView
+                    (this.ViewModel.SelectedTourViewModel.Center.ToLocation(), 
+                     this.ViewModel.SelectedTourViewModel.IntZoomLevel);
                 Map.Children.Add(this.ViewModel.SelectedTourViewModel.PushpinLocation);
             }
         }

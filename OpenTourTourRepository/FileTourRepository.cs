@@ -1,25 +1,24 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using OpenTourInterfaces;
 using OpenTourModel;
 
 namespace OpenTourClient.ViewModels
 {
-    public class TourRepository : ITourRepository
+    public class TourRepository : ITourRepository<Tour>
     {
 
         public TourRepository()  {}
 
-        private List<ITour> tours;
+        private List<Tour> tours;
 
-        public IEnumerable<ITour> LoadAll()
+        public IEnumerable<Tour> LoadAll()
         {
             return tours ?? (tours = GenerateFakeTourData());
         }
 
-        private static List<ITour> GenerateFakeTourData()
+        private static List<Tour> GenerateFakeTourData()
         {
-            return new List<ITour>()
+            return new List<Tour>()
             {
                 new Tour()
                 {
@@ -48,7 +47,7 @@ namespace OpenTourClient.ViewModels
             };
         }
 
-        public void Save(ITour tour)
+        public void Save(Tour tour)
         {
             this.tours.Add(tour);
         }

@@ -1,8 +1,9 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using OpenTourUtils;
 using OpenTourInterfaces;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace OpenTourModel
 {
@@ -12,26 +13,41 @@ namespace OpenTourModel
         private const string trk = "trk";
         private const string name = "name";
 
-        public Tour()
+        public Tour() 
         {
             this.PointsOfInterest = new List<IPointOfInterest>();
+        }
+
+        [JsonConstructor]
+        public Tour(Location center, List<Location> route, List<PointOfInterest> pointOfInterests)
+        {
+            this.Center = center;
+            this.Route = route?.ToList<ILocation>();
+            this.PointsOfInterest = pointOfInterests?.ToList<IPointOfInterest>();
         }
 
         public Tour(XDocument gpxDocument)
         {
             var gpxNameSpace = gpxDocument.Root.GetDefaultNamespace();
             this.Name = gpxDocument.Element(gpxNameSpace + gpx).Element(gpxNameSpace + trk).Element(gpxNameSpace + name).Value;
-            this.Route = gpxDocument.ToLocationCollection();
-            this.Center = this.Route[0];
+            this.Route = gpxDocument.ToLocationList<Location>().ToList<ILocation>();
+            this.Center = this.Route.FirstOrDefault();
             this.PointsOfInterest = new List<IPointOfInterest>();
         }
 
+        [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("description")]
         public string Description { get; set; }
-        public IList<string> Tags { get; set; }
-        public Location Center { get; set; }
-        public LocationCollection Route { get; set; }
-        public IList<IPointOfInterest> PointsOfInterest { get; set; }
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; }
+        [JsonProperty("center")]
+        public ILocation Center { get; set; }
+        [JsonProperty("route")]
+        public List<ILocation> Route { get; set; }
+        [JsonProperty("pointsOfInterest")]
+        public List<IPointOfInterest> PointsOfInterest { get; set; }
+        [JsonProperty("zoomLevel")]
         public int ZoomLevel { get; set; }
     }
 }

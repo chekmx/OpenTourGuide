@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpenTourInterfaces\OpenTourInterfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Device">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Device.dll</HintPath>
     </Reference>

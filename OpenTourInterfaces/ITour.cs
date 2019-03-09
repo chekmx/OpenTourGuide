@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Maps.MapControl.WPF;
 
 namespace OpenTourInterfaces
 {
     public interface ITour
     {
-        Location Center { get; set; }
+        ILocation Center { get; set; }
         string Description { get; set; }
         string Name { get; set; }
-        LocationCollection Route { get; set; }
-        IList<string> Tags { get; set; }
-        IList<IPointOfInterest> PointsOfInterest { get; set; }
+        List<ILocation> Route { get; set; }
+        List<string> Tags { get; set; }
+        List<IPointOfInterest> PointsOfInterest { get; set; }
         int ZoomLevel { get; set; }
     }
 }

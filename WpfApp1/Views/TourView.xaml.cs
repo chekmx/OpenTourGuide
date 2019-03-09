@@ -1,6 +1,6 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-using OpenTourClient.ViewModels;
+﻿using OpenTourClient.ViewModels;
 using OpenTourModel;
+using OpenTourUtils;
 using System.Windows.Controls;
 using Unity;
 
@@ -41,7 +41,7 @@ namespace OpenTourClient
             if (this.ViewModel.CanEdit)
             {
                 var location = Map.ViewportPointToLocation(e.GetPosition(Map));
-                this.ViewModel.SelectedTourViewModel.Tour.PointsOfInterest.Add(new PointOfInterest(location));
+                this.ViewModel.SelectedTourViewModel.Tour.PointsOfInterest.Add(new PointOfInterest(location.ToILocation<Location>()));
                 this.ViewModel.PopulateMap(Map);
             }
         }

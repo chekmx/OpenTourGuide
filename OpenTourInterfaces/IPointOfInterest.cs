@@ -4,7 +4,7 @@ namespace OpenTourInterfaces
 {
     public interface IPointOfInterest
     {
-        Location Location { get; set; }
+        ILocation Location { get; set; }
         string Name { get; set; }
     }
 }

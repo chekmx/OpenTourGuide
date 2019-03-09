@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTourUtils", "OpenTourUt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourClientTests", "OpenTourClientTests\OpenTourClientTests.csproj", "{CE387D6F-ABC5-42A8-BFC1-218C3CB7BFA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourModel", "OpenTourModel\OpenTourModel.csproj", "{0A4C6B33-04F5-48AD-9A16-C995C2D84C4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTourModel", "OpenTourModel\OpenTourModel.csproj", "{0A4C6B33-04F5-48AD-9A16-C995C2D84C4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourInterfaces", "OpenTourInterfaces\OpenTourInterfaces.csproj", "{238C6B15-1D5F-4B4A-83F4-933A86165E84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTourInterfaces", "OpenTourInterfaces\OpenTourInterfaces.csproj", "{238C6B15-1D5F-4B4A-83F4-933A86165E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourTourService", "OpenTourTourService\OpenTourTourService.csproj", "{C42B657A-B224-4235-BCAF-0729A39D479B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTourTourRepository", "OpenTourTourRepository\OpenTourTourRepository.csproj", "{F4DEDD9F-8672-4040-B162-3A5FD15A2C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{238C6B15-1D5F-4B4A-83F4-933A86165E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{238C6B15-1D5F-4B4A-83F4-933A86165E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{238C6B15-1D5F-4B4A-83F4-933A86165E84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42B657A-B224-4235-BCAF-0729A39D479B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42B657A-B224-4235-BCAF-0729A39D479B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42B657A-B224-4235-BCAF-0729A39D479B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42B657A-B224-4235-BCAF-0729A39D479B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4DEDD9F-8672-4040-B162-3A5FD15A2C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DEDD9F-8672-4040-B162-3A5FD15A2C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DEDD9F-8672-4040-B162-3A5FD15A2C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DEDD9F-8672-4040-B162-3A5FD15A2C51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

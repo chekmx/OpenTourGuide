@@ -94,8 +94,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Repositories\TourRepository.cs" />
-    <Compile Include="Repositories\ITourRepository.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NavigationItem.cs" />
     <Compile Include="ViewModels\CommandHandler.cs" />
@@ -163,6 +161,10 @@
     <ProjectReference Include="..\OpenTourModel\OpenTourModel.csproj">
       <Project>{0a4c6b33-04f5-48ad-9a16-c995c2d84c4e}</Project>
       <Name>OpenTourModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenTourTourRepository\OpenTourTourRepository.csproj">
+      <Project>{f4dedd9f-8672-4040-b162-3a5fd15a2c51}</Project>
+      <Name>OpenTourTourRepository</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenTourUtils\OpenTourUtils.csproj">
       <Project>{ab5e66cc-15d5-4438-a467-6ac6a86e21a3}</Project>

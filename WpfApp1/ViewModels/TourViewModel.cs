@@ -1,22 +1,24 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using OpenTourInterfaces;
+using OpenTourModel;
+using OpenTourUtils;
 using System.Linq;
 
 namespace OpenTourClient.ViewModels
 {
     public class TourViewModel
     {
-        private ITourRepository tourRepository;
+        private ITourRepository<Tour> tourRepository;
 
-        public ITour Tour { get; private set; }
+        public Tour Tour { get; private set; }
 
-        public TourViewModel(ITourRepository tourRepository)
+        public TourViewModel(ITourRepository<Tour> tourRepository)
         {
             this.tourRepository = tourRepository;
             this.Tour = tourRepository.LoadAll().ToList()[0];
         }
 
-        public TourViewModel(ITourRepository tourRepository, ITour tour)
+        public TourViewModel(ITourRepository<Tour> tourRepository, Tour tour)
         {
             this.tourRepository = tourRepository;
             this.Tour = tour;
@@ -40,7 +42,7 @@ namespace OpenTourClient.ViewModels
             set { Tour.ZoomLevel = value; }
         }
 
-        public Location Center
+        public OpenTourInterfaces.ILocation Center
         {
             get { return Tour.Center; }
             set { Tour.Center = value; }
@@ -75,7 +77,7 @@ namespace OpenTourClient.ViewModels
             get
             {
                 var pushpin = new Pushpin();
-                MapLayer.SetPosition(pushpin, this.Center);
+                MapLayer.SetPosition(pushpin, this.Center.ToLocation());
                 return pushpin;
             }
         }

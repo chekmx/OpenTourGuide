@@ -1,4 +1,6 @@
 ﻿using OpenTourClient.Views;
+using OpenTourInterfaces;
+using OpenTourModel;
 using Unity;
 
 namespace OpenTourClient.ViewModels
@@ -11,8 +13,9 @@ namespace OpenTourClient.ViewModels
         public MainWindowViewModel()
         {
             IUnityContainer container = new UnityContainer();
-            container.RegisterInstance(typeof(ITourRepository), new  TourRepository());
-            container.RegisterInstance(typeof(ToursViewModel), new ToursViewModel(container.Resolve<ITourRepository>()));
+            ITourRepository<Tour> repo = new WebTourRepository<Tour>() as ITourRepository<Tour>;
+            container.RegisterInstance(typeof(ITourRepository<Tour>), repo);
+            container.RegisterInstance(typeof(ToursViewModel), new ToursViewModel(container.Resolve<ITourRepository<Tour>>()));
 
             this.ToursView = container.Resolve<ToursView>();
             this.TourView = container.Resolve<TourView>();

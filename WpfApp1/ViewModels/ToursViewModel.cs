@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using OpenTourModel;
 using Microsoft.Maps.MapControl.WPF;
 using OpenTourInterfaces;
+using OpenTourUtils;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
@@ -16,7 +17,7 @@ namespace OpenTourClient.ViewModels
 {
     public class ToursViewModel : INotifyPropertyChanged
     {
-        private ITourRepository tourRepository;
+        private ITourRepository<Tour> tourRepository;
         private bool canEdit;
 
         public GeoPosition<GeoCoordinate> CurrentPosition { get; private set; }
@@ -36,7 +37,7 @@ namespace OpenTourClient.ViewModels
             set { this.selectedTourViewModel = value; OnPropertyChanged("SelectedTourViewModel"); }
         }
 
-        public ToursViewModel(ITourRepository tourRepository)
+        public ToursViewModel(ITourRepository<Tour> tourRepository)
         {
             this.tourRepository = tourRepository;
             this.Tours = new ObservableCollection<TourViewModel>(tourRepository.LoadAll().Select(t => new TourViewModel(tourRepository, t)));
@@ -130,26 +131,26 @@ namespace OpenTourClient.ViewModels
             if (map != null)
             {
                 map.Children.Clear();
-                map.SetView(this.SelectedTourViewModel.Center, this.SelectedTourViewModel.IntZoomLevel);
+                map.SetView(this.SelectedTourViewModel.Center.ToLocation(), this.SelectedTourViewModel.IntZoomLevel);
                 map.Children.Add(this.SelectedTourViewModel.PushpinLocation);
 
                 MapPolyline polyline = new MapPolyline();
-                polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
+                polyline.Stroke = new SolidColorBrush(Colors.Blue);
                 polyline.StrokeThickness = 5;
                 polyline.Opacity = 0.7;
-                polyline.Locations = this.SelectedTourViewModel.Tour.Route;
+                polyline.Locations = this.SelectedTourViewModel.Tour.Route?.ToLocationCollection();
 
                 map.Children.Add(polyline);
                 if (polyline.Locations != null)
                 {
-                    map.SetView(polyline.Locations, new System.Windows.Thickness(5), 0);
+                    map.SetView(polyline.Locations, new Thickness(5), 0);
                 }
 
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
                 {
                     Pushpin pushpin = new Pushpin();
                     pushpin.MouseLeftButtonDown += PointOfInterestClicked;
-                    pushpin.Location = pointOfInterest.Location;
+                    pushpin.Location = pointOfInterest.Location.ToLocation();
                     map.Children.Add(pushpin);
                 }
             }
