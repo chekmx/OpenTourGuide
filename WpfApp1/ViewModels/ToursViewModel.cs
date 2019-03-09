@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Device.Location;
 using System;
 using OpenTourUtils;
+using System.Xml.Linq;
 
 namespace OpenTourClient.ViewModels
 {
@@ -80,14 +81,24 @@ namespace OpenTourClient.ViewModels
 
         private object ExecuteNewCommand(object param)
         {
-            var tour = new Models.Tour();
-            this.SelectedTourViewModel = new TourViewModel(tourRepository, tour);
-            tour.Center = this.CurrentPosition.Location.ToLocation();
-            tour.ZoomLevel = 16;
-            this.Tours.Add(this.SelectedTourViewModel);
-            this.CanEdit = true;
-            OnPropertyChanged("Tours");
-            return tour;
+            Microsoft.Win32.OpenFileDialog openFileDlg = new Microsoft.Win32.OpenFileDialog();
+            var result = openFileDlg.ShowDialog();
+
+            if (result.Equals(true))
+            {
+                XDocument document = XDocument.Load(openFileDlg.FileName);
+
+                var tour = new Models.Tour(document);
+                this.SelectedTourViewModel = new TourViewModel(tourRepository, tour);
+                //tour.Center = this.CurrentPosition.Location.ToLocation();
+                tour.ZoomLevel = 16;
+                this.Tours.Add(this.SelectedTourViewModel);
+                this.CanEdit = true;
+                OnPropertyChanged("Tours");
+                return tour;
+            }
+
+            return null;
         }
 
         private object SaveSaveSelectedTour(object param)
