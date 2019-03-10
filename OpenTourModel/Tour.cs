@@ -4,6 +4,9 @@ using OpenTourUtils;
 using OpenTourInterfaces;
 using Newtonsoft.Json;
 using System.Linq;
+using System;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace OpenTourModel
 {
@@ -28,13 +31,16 @@ namespace OpenTourModel
 
         public Tour(XDocument gpxDocument)
         {
+            this.Id = Guid.NewGuid();
             var gpxNameSpace = gpxDocument.Root.GetDefaultNamespace();
             this.Name = gpxDocument.Element(gpxNameSpace + gpx).Element(gpxNameSpace + trk).Element(gpxNameSpace + name).Value;
             this.Route = gpxDocument.ToLocationList<Location>().ToList<ILocation>();
             this.Center = this.Route.FirstOrDefault();
             this.PointsOfInterest = new List<IPointOfInterest>();
         }
-
+        [BsonId]
+        [JsonProperty("_id")]
+        public Guid Id { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("description")]

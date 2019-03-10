@@ -1,18 +1,21 @@
 ﻿using Nancy;
 using Nancy.Extensions;
 using Newtonsoft.Json;
-using OpenTourClient.ViewModels;
+using OpenTourTourRepository;
 using OpenTourModel;
 using OpenTourInterfaces;
+using Nancy.Json;
+using System;
 
 namespace OpenTourTourService
 {
     public class TourModule : NancyModule
     {
-        private static ITourRepository<Tour> repository = new FileTourRepository() as ITourRepository<Tour>;
+        private static ITourRepository<Tour> repository = new MongoDbRepository() as ITourRepository<Tour>;
 
         public TourModule()
         {
+            JsonSettings.MaxJsonLength = Int32.MaxValue; 
             Get["/"] = GetAll;
             Get["/tours"] = GetAll;
             Post["/saveTour"] = Save;

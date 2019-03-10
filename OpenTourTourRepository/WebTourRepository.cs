@@ -3,8 +3,9 @@ using OpenTourInterfaces;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using System;
 
-namespace OpenTourClient.ViewModels
+namespace OpenTourTourRepository
 {
     public class WebTourRepository<T> : ITourRepository<T> where T : ITour
     {

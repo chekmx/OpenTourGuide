@@ -37,7 +37,7 @@ namespace OpenTourClient.Views
 
         private void PopulateMap()
         {
-            if (Map != null)
+            if (Map != null && this.ViewModel.SelectedTourViewModel != null)
             {
                 Map.Children.Clear();
                 Map.SetView

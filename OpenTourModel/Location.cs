@@ -6,6 +6,12 @@ namespace OpenTourModel
     {
         public Location() { }
 
+        public Location(ILocation location)
+        {
+            this.Longitude = location.Longitude;
+            this.Latitude = location.Latitude;
+        }
+
         public Location(double latitude, double longitude)
         {
             this.Longitude = longitude;

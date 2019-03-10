@@ -3,6 +3,7 @@ using OpenTourInterfaces;
 using OpenTourModel;
 using OpenTourUtils;
 using System.Linq;
+using System.Windows.Media;
 
 namespace OpenTourClient.ViewModels
 {
@@ -77,6 +78,7 @@ namespace OpenTourClient.ViewModels
             get
             {
                 var pushpin = new Pushpin();
+                pushpin.Background = Brushes.Green;
                 MapLayer.SetPosition(pushpin, this.Center.ToLocation());
                 return pushpin;
             }

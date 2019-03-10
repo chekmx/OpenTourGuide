@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OpenTourInterfaces;
 using OpenTourModel;
 
-namespace OpenTourClient.ViewModels
+namespace OpenTourTourRepository
 {
     public class FileTourRepository : ITourRepository<Tour>
     {
@@ -22,6 +23,7 @@ namespace OpenTourClient.ViewModels
             {
                 new Tour()
                 {
+                    Id = Guid.NewGuid(),
                     Name ="Pffaikersee Rundfahrt",
                     Description = "Easy Walk round the delightful Pffaikersee",
                     Tags = new List<string> { "Easy", "Wheel chair friendly", "Flat", "Round Trip"},
@@ -30,6 +32,7 @@ namespace OpenTourClient.ViewModels
                 },
                 new Tour()
                 {
+                    Id = Guid.NewGuid(),
                     Name ="Greifensee Rundfahrt",
                     Description = "Easy Walk round the delightful Greifensee",
                     Tags = new List<string> { "Medium", "Wheel chair friendly", "Mostly  Flat", "Round Trip"},
@@ -38,6 +41,7 @@ namespace OpenTourClient.ViewModels
                 },
                 new Tour()
                 {
+                    Id = Guid.NewGuid(),
                     Name ="Rosinli",
                     Description = "Walk up to Rosinli for the excellent view of the Zurich oberland",
                     Tags = new List<string> { "Difficult", "Steep", "Point to Point"},

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenTourInterfaces
 {
     public interface ITour
     {
+        Guid Id { get; set; }
         ILocation Center { get; set; }
         string Description { get; set; }
         string Name { get; set; }

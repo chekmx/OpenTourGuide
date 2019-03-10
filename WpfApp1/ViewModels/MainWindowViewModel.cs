@@ -1,4 +1,5 @@
 ﻿using OpenTourClient.Views;
+using OpenTourTourRepository;
 using OpenTourInterfaces;
 using OpenTourModel;
 using Unity;

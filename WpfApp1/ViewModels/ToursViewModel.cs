@@ -41,7 +41,7 @@ namespace OpenTourClient.ViewModels
         {
             this.tourRepository = tourRepository;
             this.Tours = new ObservableCollection<TourViewModel>(tourRepository.LoadAll().Select(t => new TourViewModel(tourRepository, t)));
-            this.SelectedTourViewModel = this.Tours.First();
+            this.SelectedTourViewModel = this.Tours.FirstOrDefault();
             var watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
             watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(15000));
@@ -80,7 +80,7 @@ namespace OpenTourClient.ViewModels
         {
             get
             {
-                return save ?? (save = new CommandHandler(param => this.SaveSaveSelectedTour(param), true));
+                return save ?? (save = new CommandHandler(param => this.SaveSelectedTour(param), true));
             }
         }
 
@@ -107,12 +107,16 @@ namespace OpenTourClient.ViewModels
             return null;
         }
 
-        private object SaveSaveSelectedTour(object param)
+        private object SaveSelectedTour(object param)
         {
-            this.SelectedTourViewModel.Save();
-            this.CanEdit = false;
-            OnPropertyChanged("Tours");
-            return this.SelectedTourViewModel;
+            if (this.SelectedTourViewModel != null)
+            {
+                this.SelectedTourViewModel.Save();
+                this.CanEdit = false;
+                OnPropertyChanged("Tours");
+                return this.SelectedTourViewModel;
+            }
+            return null;
         }
 
         private object Editable(object param)
@@ -128,7 +132,7 @@ namespace OpenTourClient.ViewModels
 
         public void PopulateMap(Map map)
         {
-            if (map != null)
+            if (map != null && this.SelectedTourViewModel != null)
             {
                 map.Children.Clear();
                 map.SetView(this.SelectedTourViewModel.Center.ToLocation(), this.SelectedTourViewModel.IntZoomLevel);
@@ -143,7 +147,14 @@ namespace OpenTourClient.ViewModels
                 map.Children.Add(polyline);
                 if (polyline.Locations != null)
                 {
-                    map.SetView(polyline.Locations, new Thickness(5), 0);
+                    try
+                    {
+                        map.SetView(polyline.Locations, new Thickness(5), 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        //TODO Add nlogging
+                    }
                 }
 
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)

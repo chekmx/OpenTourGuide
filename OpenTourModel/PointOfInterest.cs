@@ -5,6 +5,7 @@ namespace OpenTourModel
 {
     public class PointOfInterest : IPointOfInterest
     {
+
         public PointOfInterest(ILocation location)
         {
             this.Location = location;
@@ -14,6 +15,11 @@ namespace OpenTourModel
         public PointOfInterest(Location location)
         {
             this.Location = location;
+        }
+
+        public PointOfInterest(IPointOfInterest p)
+        {
+            this.Location = p.Location;
         }
 
         public string Name { get; set; }
