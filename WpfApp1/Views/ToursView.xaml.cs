@@ -26,8 +26,7 @@ namespace OpenTourClient.Views
 
         public ToursView()
         {
-            InitializeComponent();
-            
+            InitializeComponent();         
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,14 +36,9 @@ namespace OpenTourClient.Views
 
         private void PopulateMap()
         {
-            if (Map != null && this.ViewModel.SelectedTourViewModel != null)
-            {
-                Map.Children.Clear();
-                Map.SetView
-                    (this.ViewModel.SelectedTourViewModel.Center.ToLocation(), 
-                     this.ViewModel.SelectedTourViewModel.IntZoomLevel);
-                Map.Children.Add(this.ViewModel.SelectedTourViewModel.PushpinLocation);
-            }
+            this.ViewModel.Map = Map; 
+            this.ViewModel.DefaultZoom = 12d;
+            this.ViewModel.ShowTours(Map);
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)

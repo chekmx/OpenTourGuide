@@ -20,8 +20,8 @@ namespace OpenTourClient.ViewModels
         private ITourRepository<Tour> tourRepository;
         private bool canEdit;
 
-        public GeoPosition<GeoCoordinate> CurrentPosition { get; private set; }
-
+        public OpenTourModel.Location CurrentPosition { get; private set; }
+        
         public bool CanEdit
         {
             get {return this.canEdit; }
@@ -30,6 +30,61 @@ namespace OpenTourClient.ViewModels
 
         public ObservableCollection<TourViewModel> Tours { get; set; }
         private TourViewModel selectedTourViewModel;
+
+        public void ShowTours(Map map)
+        {
+            if (map != null && this.SelectedTourViewModel != null)
+            {
+                foreach (TourViewModel tourView in this.Tours)
+                {
+                    Pushpin pushpin = new Pushpin();
+                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
+                    pushpin.Location = tourView.Center.ToLocation();
+                    MapLayer.SetPosition(pushpin, pushpin.Location);
+                    map.Children.Add(pushpin);
+                }
+            }
+        }
+
+        public void ShowRouteMap(Map map)
+        {
+            if (map != null && this.SelectedTourViewModel != null)
+            {
+                MapPolyline polyline = new MapPolyline();
+                polyline.Stroke = new SolidColorBrush(Colors.Blue);
+                polyline.StrokeThickness = 5;
+                polyline.Opacity = 0.7;
+                polyline.Locations = this.SelectedTourViewModel.Tour.Route?.ToLocationCollection();
+
+                map.Children.Add(polyline);
+                if (polyline.Locations != null)
+                {
+                    try
+                    {
+                        map.SetView(polyline.Locations, new Thickness(5), 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        //TODO Add nlogging
+                    }
+                }
+            }
+        }
+
+        public void ShowPointsOfInterest(Map map)
+        {
+            if (map != null && this.SelectedTourViewModel != null)
+            {
+                foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
+                {
+                    Pushpin pushpin = new Pushpin();
+                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
+                    pushpin.Location = pointOfInterest.Location.ToLocation();
+                    MapLayer.SetPosition(pushpin, pushpin.Location);
+                    map.Children.Add(pushpin);
+                }
+            }
+        }
 
         public TourViewModel SelectedTourViewModel
         {
@@ -45,11 +100,22 @@ namespace OpenTourClient.ViewModels
             var watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
             watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(watcher_PositionChanged);
             watcher.TryStart(false, TimeSpan.FromMilliseconds(15000));
+            this.CurrentPosition =  new OpenTourModel.Location(this.SelectedTourViewModel.Center);
         }
 
         private void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
-            this.CurrentPosition = e.Position;
+            this.CurrentPosition = new OpenTourModel.Location(e.Position.Location.Latitude, e.Position.Location.Longitude);
+            OnPropertyChanged("CurrentPosition");
+            this.ShowCurrentLocation();
+        }
+
+        private void ShowCurrentLocation()
+        {
+            var pushPin = new Pushpin();
+            pushPin.Location = this.CurrentPosition.ToLocation();
+            this.Map.Children.Add(pushPin);
+            this.Map.SetView(this.CurrentPosition.ToLocation(), this.DefaultZoom);
         }
 
         private ICommand createNew;
@@ -84,6 +150,8 @@ namespace OpenTourClient.ViewModels
             }
         }
 
+        public double DefaultZoom { get; set; }
+        public Map Map { get; internal set; }
 
         private object ExecuteNewCommand(object param)
         {
@@ -130,41 +198,13 @@ namespace OpenTourClient.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void PopulateMap(Map map)
+        public void ShowSelectedTourLocation(Map map)
         {
             if (map != null && this.SelectedTourViewModel != null)
             {
                 map.Children.Clear();
                 map.SetView(this.SelectedTourViewModel.Center.ToLocation(), this.SelectedTourViewModel.IntZoomLevel);
                 map.Children.Add(this.SelectedTourViewModel.PushpinLocation);
-
-                MapPolyline polyline = new MapPolyline();
-                polyline.Stroke = new SolidColorBrush(Colors.Blue);
-                polyline.StrokeThickness = 5;
-                polyline.Opacity = 0.7;
-                polyline.Locations = this.SelectedTourViewModel.Tour.Route?.ToLocationCollection();
-
-                map.Children.Add(polyline);
-                if (polyline.Locations != null)
-                {
-                    try
-                    {
-                        map.SetView(polyline.Locations, new Thickness(5), 0);
-                    }
-                    catch (Exception ex)
-                    {
-                        //TODO Add nlogging
-                    }
-                }
-
-                foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
-                {
-                    Pushpin pushpin = new Pushpin();
-                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
-                    pushpin.Location = pointOfInterest.Location.ToLocation();
-                    MapLayer.SetPosition(pushpin, pushpin.Location);
-                    map.Children.Add(pushpin);
-                }
             }
         }
 
