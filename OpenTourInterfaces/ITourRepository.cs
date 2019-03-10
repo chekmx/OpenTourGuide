@@ -1,7 +1,6 @@
-﻿using OpenTourInterfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace OpenTourClient.ViewModels
+namespace OpenTourInterfaces
 {
     public interface ITourRepository<T> where T : ITour
     {

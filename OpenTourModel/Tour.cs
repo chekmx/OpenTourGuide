@@ -19,11 +19,11 @@ namespace OpenTourModel
         }
 
         [JsonConstructor]
-        public Tour(Location center, List<Location> route, List<PointOfInterest> pointOfInterests)
+        public Tour(Location center, List<Location> route, List<PointOfInterest> pointsOfInterest)
         {
             this.Center = center;
             this.Route = route?.ToList<ILocation>();
-            this.PointsOfInterest = pointOfInterests?.ToList<IPointOfInterest>();
+            this.PointsOfInterest = pointsOfInterest?.ToList<IPointOfInterest>();
         }
 
         public Tour(XDocument gpxDocument)

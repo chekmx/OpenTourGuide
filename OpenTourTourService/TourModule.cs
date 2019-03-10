@@ -1,15 +1,15 @@
 ﻿using Nancy;
 using Nancy.Extensions;
-using Nancy.ModelBinding;
 using Newtonsoft.Json;
 using OpenTourClient.ViewModels;
 using OpenTourModel;
+using OpenTourInterfaces;
 
 namespace OpenTourTourService
 {
     public class TourModule : NancyModule
     {
-        private static ITourRepository<Tour> repository = new TourRepository();
+        private static ITourRepository<Tour> repository = new FileTourRepository() as ITourRepository<Tour>;
 
         public TourModule()
         {

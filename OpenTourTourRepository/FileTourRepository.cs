@@ -4,10 +4,10 @@ using OpenTourModel;
 
 namespace OpenTourClient.ViewModels
 {
-    public class TourRepository : ITourRepository<Tour>
+    public class FileTourRepository : ITourRepository<Tour>
     {
 
-        public TourRepository()  {}
+        public FileTourRepository()  {}
 
         private List<Tour> tours;
 

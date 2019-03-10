@@ -1,4 +1,4 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using Newtonsoft.Json;
 using OpenTourInterfaces;
 
 namespace OpenTourModel
@@ -6,6 +6,12 @@ namespace OpenTourModel
     public class PointOfInterest : IPointOfInterest
     {
         public PointOfInterest(ILocation location)
+        {
+            this.Location = location;
+        }
+
+        [JsonConstructor]
+        public PointOfInterest(Location location)
         {
             this.Location = location;
         }

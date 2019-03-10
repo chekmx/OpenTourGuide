@@ -1,6 +1,4 @@
-﻿using Microsoft.Maps.MapControl.WPF;
-
-namespace OpenTourInterfaces
+﻿namespace OpenTourInterfaces
 {
     public interface IPointOfInterest
     {

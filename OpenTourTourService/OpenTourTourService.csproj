@@ -83,7 +83,7 @@
       <Name>OpenTourInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenTourModel\OpenTourModel.csproj">
-      <Project>{0A4C6B33-04F5-48AD-9A16-C995C2D84C4E}</Project>
+      <Project>{0a4c6b33-04f5-48ad-9a16-c995c2d84c4e}</Project>
       <Name>OpenTourModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenTourTourRepository\OpenTourTourRepository.csproj">
