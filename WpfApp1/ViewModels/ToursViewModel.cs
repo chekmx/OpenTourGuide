@@ -12,6 +12,8 @@ using OpenTourUtils;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using OpenTourClient.Views;
+using MaterialDesignThemes.Wpf;
 
 namespace OpenTourClient.ViewModels
 {
@@ -213,13 +215,20 @@ namespace OpenTourClient.ViewModels
             var pushPin = sender as Pushpin;
             if (pushPin != null)
             {
-                var map = pushPin.Parent as MapLayer;
-                TextBlock tb = new TextBlock();
+                Card card = new Card
+                {
+                    Content = new PointOfInterestView(),
+                    Width = 200
+                };
+                var maplayer = pushPin.Parent as MapLayer;
+                
+                TextBox tb = new TextBox();
                 tb.Foreground = new SolidColorBrush(
                     Color.FromArgb(255, 128, 255, 128));
                 tb.Margin = new Thickness(5);
-                tb.Text = pushPin.Location.ToString();
-                map.AddChild(tb, pushPin.Location);
+                tb.Text = "Test";
+                maplayer.AddChild(card, pushPin.Location);
+                maplayer.AddChild(tb, pushPin.Location);
             }
         }
     }

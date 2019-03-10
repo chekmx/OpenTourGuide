@@ -102,10 +102,17 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PointOfInterestView.xaml.cs">
+      <DependentUpon>PointOfInterestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ToursView.xaml.cs">
       <DependentUpon>ToursView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PointOfInterestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
