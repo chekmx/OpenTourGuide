@@ -40,7 +40,7 @@ namespace OpenTourClient.ViewModels
                 foreach (TourViewModel tourView in this.Tours)
                 {
                     Pushpin pushpin = new Pushpin();
-                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
+                    pushpin.ToolTip = GetPointOfInterest();
                     pushpin.Location = tourView.Center.ToLocation();
                     MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);
@@ -80,7 +80,7 @@ namespace OpenTourClient.ViewModels
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
                 {
                     Pushpin pushpin = new Pushpin();
-                    pushpin.MouseLeftButtonDown += PointOfInterestClicked;
+                    pushpin.ToolTip = GetPointOfInterest();
                     pushpin.Location = pointOfInterest.Location.ToLocation();
                     MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);
@@ -154,6 +154,7 @@ namespace OpenTourClient.ViewModels
 
         public double DefaultZoom { get; set; }
         public Map Map { get; internal set; }
+        public Card CurrentCard { get; private set; }
 
         private object ExecuteNewCommand(object param)
         {
@@ -210,26 +211,14 @@ namespace OpenTourClient.ViewModels
             }
         }
 
-        private void PointOfInterestClicked(object sender, MouseButtonEventArgs e)
+        private Card GetPointOfInterest()
         {
-            var pushPin = sender as Pushpin;
-            if (pushPin != null)
+            Card card = new Card
             {
-                Card card = new Card
-                {
-                    Content = new PointOfInterestView(),
-                    Width = 200
-                };
-                var maplayer = pushPin.Parent as MapLayer;
-                
-                TextBox tb = new TextBox();
-                tb.Foreground = new SolidColorBrush(
-                    Color.FromArgb(255, 128, 255, 128));
-                tb.Margin = new Thickness(5);
-                tb.Text = "Test";
-                maplayer.AddChild(card, pushPin.Location);
-                maplayer.AddChild(tb, pushPin.Location);
-            }
+                Content = new PointOfInterestView(),
+                Width = 200
+            };
+            return card;
         }
     }
 }
