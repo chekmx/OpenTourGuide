@@ -25,7 +25,7 @@ namespace OpenTourClient
                 this.DataContext = value;
                 this.ViewModel.ShowSelectedTourLocation(Map);
                 this.ViewModel.ShowRouteMap(Map);
-                this.ViewModel.ShowPointsOfInterest(Map);
+                this.ViewModel.ShowPointOfInterestCards(Map);
             }
         }
 
@@ -38,7 +38,7 @@ namespace OpenTourClient
         {
             this.ViewModel.ShowSelectedTourLocation(Map);
             this.ViewModel.ShowRouteMap(Map);
-            this.ViewModel.ShowPointsOfInterest(Map);
+            this.ViewModel.ShowPointOfInterestCards(Map);
         }
 
         private void Map_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -49,7 +49,7 @@ namespace OpenTourClient
                 this.ViewModel.SelectedTourViewModel.Tour.PointsOfInterest.Add(new PointOfInterest(location.ToILocation<OpenTourModel.Location>()));
 
                 Map.Children.Add(new Pushpin());
-                this.ViewModel.ShowPointsOfInterest(Map);
+                this.ViewModel.ShowPointOfInterestCards(Map);
             }
         }
     }

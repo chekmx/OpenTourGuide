@@ -40,7 +40,7 @@ namespace OpenTourClient.ViewModels
                 foreach (TourViewModel tourView in this.Tours)
                 {
                     Pushpin pushpin = new Pushpin();
-                    pushpin.ToolTip = GetPointOfInterest();
+                    pushpin.ToolTip = this.SelectedTourViewModel.GetTourCard(tourView);
                     pushpin.Location = tourView.Center.ToLocation();
                     MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);
@@ -73,14 +73,14 @@ namespace OpenTourClient.ViewModels
             }
         }
 
-        public void ShowPointsOfInterest(Map map)
+        public void ShowPointOfInterestCards(Map map)
         {
             if (map != null && this.SelectedTourViewModel != null)
             {
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
                 {
                     Pushpin pushpin = new Pushpin();
-                    pushpin.ToolTip = GetPointOfInterest();
+                    pushpin.ToolTip = this.SelectedTourViewModel.GetPointOfInterest();
                     pushpin.Location = pointOfInterest.Location.ToLocation();
                     MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);
@@ -209,16 +209,6 @@ namespace OpenTourClient.ViewModels
                 map.SetView(this.SelectedTourViewModel.Center.ToLocation(), this.SelectedTourViewModel.IntZoomLevel);
                 map.Children.Add(this.SelectedTourViewModel.PushpinLocation);
             }
-        }
-
-        private Card GetPointOfInterest()
-        {
-            Card card = new Card
-            {
-                Content = new PointOfInterestView(),
-                Width = 200
-            };
-            return card;
         }
     }
 }

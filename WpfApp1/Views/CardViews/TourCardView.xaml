@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OpenTourClient.Views.PointOfInterestView"
+﻿<UserControl x:Class="OpenTourClient.Views.TourCardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -45,13 +45,11 @@
       Grid.Row="1"
       Margin="8 24 8 0">
                 <TextBlock
-        FontWeight="Bold">
-      Cycling
+        FontWeight="Bold" Text="{Binding TxtTourName}">
                 </TextBlock>
                 <TextBlock
         TextWrapping="Wrap"
-        VerticalAlignment="Center">
-      A great way to keep fit and forget about the constant grind of IT.
+        VerticalAlignment="Center" Text="{Binding TxtDescription}">
                 </TextBlock>
             </StackPanel>
             <StackPanel

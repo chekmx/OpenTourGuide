@@ -99,20 +99,27 @@
     <Compile Include="ViewModels\CommandHandler.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="ViewModels\TourViewModel.cs" />
+    <Compile Include="Views\CardViews\TourCardView.xaml.cs">
+      <DependentUpon>TourCardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PointOfInterestView.xaml.cs">
-      <DependentUpon>PointOfInterestView.xaml</DependentUpon>
+    <Compile Include="Views\CardViews\PointOfInterestCardView.xaml.cs">
+      <DependentUpon>PointOfInterestCardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ToursView.xaml.cs">
       <DependentUpon>ToursView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\CardViews\TourCardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PointOfInterestView.xaml">
+    <Page Include="Views\CardViews\PointOfInterestCardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

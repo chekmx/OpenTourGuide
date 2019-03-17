@@ -1,7 +1,10 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Maps.MapControl.WPF;
+using OpenTourClient.Views;
 using OpenTourInterfaces;
 using OpenTourModel;
 using OpenTourUtils;
+using System;
 using System.Linq;
 using System.Windows.Media;
 
@@ -82,6 +85,26 @@ namespace OpenTourClient.ViewModels
                 MapLayer.SetPosition(pushpin, this.Center.ToLocation());
                 return pushpin;
             }
+        }
+
+        public Card GetPointOfInterest()
+        {
+            Card card = new Card
+            {
+                Content = new PointOfInterestView(),
+                Width = 200
+            };
+            return card;
+        }
+
+        public Card GetTourCard(TourViewModel tourView)
+        {
+            Card card = new Card
+            {
+                Content = new TourCardView(tourView),
+                Width = 200
+            };
+            return card;
         }
     }
 }
