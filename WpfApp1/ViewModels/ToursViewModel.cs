@@ -80,7 +80,7 @@ namespace OpenTourClient.ViewModels
                 foreach (IPointOfInterest pointOfInterest in this.SelectedTourViewModel.Tour.PointsOfInterest)
                 {
                     Pushpin pushpin = new Pushpin();
-                    pushpin.ToolTip = this.SelectedTourViewModel.GetPointOfInterest();
+                    pushpin.ToolTip = this.SelectedTourViewModel.GetPointOfInterest(pointOfInterest);
                     pushpin.Location = pointOfInterest.Location.ToLocation();
                     MapLayer.SetPosition(pushpin, pushpin.Location);
                     map.Children.Add(pushpin);

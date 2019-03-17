@@ -87,11 +87,11 @@ namespace OpenTourClient.ViewModels
             }
         }
 
-        public Card GetPointOfInterest()
+        public Card GetPointOfInterest(IPointOfInterest pointOfInterest)
         {
             Card card = new Card
             {
-                Content = new PointOfInterestView(),
+                Content = new PointOfInterestView(pointOfInterest),
                 Width = 200
             };
             return card;

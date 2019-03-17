@@ -45,8 +45,10 @@
       Grid.Row="1"
       Margin="8 24 8 0">
                 <TextBlock
-        FontWeight="Bold">
-      Point Of Interest
+        FontWeight="Bold" Text="{Binding Location.Latitude}">
+                </TextBlock>
+                <TextBlock
+        FontWeight="Bold" Text="{Binding Location.Longitude}">
                 </TextBlock>
                 <TextBlock
         TextWrapping="Wrap"
